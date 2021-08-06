@@ -39,5 +39,8 @@ public class XmlTest  {
         System.out.println("第二次");
 
 
+        System.out.println("小明add");
+
+
     }
 }
