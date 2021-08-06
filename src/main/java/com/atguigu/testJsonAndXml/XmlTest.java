@@ -41,8 +41,5 @@ public class XmlTest  {
         
         System.out.println("主分支提交");
 
-        System.out.println("小明add");
-
-
     }
 }
