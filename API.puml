@@ -1,0 +1,18 @@
+@startuml
+actor admin as "用户"
+actor "用户" as admin
+admin-> API平台 :调用API平台的接口(基于RPC协议)
+API平台-->admin :返回的数据反馈给用户
+
+
+alt 第三方服务接受rpc协议的请求
+     API平台-> 第三方服务 :直接发送rpc请求
+     第三方服务-->API平台 :接收第三方服务返回的数据
+
+else  第三方服务接收http协议的请求
+   API平台-> 第三方服务 :需要进行转换 1、协议的转换2、报文的转换
+    第三方服务-->API平台 :接收第三方服务返回的数据,将http返回的报文的数据进行解析和转化
+end
+
+
+@enduml
