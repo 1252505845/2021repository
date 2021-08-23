@@ -35,11 +35,7 @@ public class XmlTest  {
         String json = XmlJsonUtils.xmlTojson(xml);
         System.out.println("json:" + json);
 
-        System.out.println("测试 ");
-        System.out.println("第二次");
 
-        
-        System.out.println("主分支提交");
 
     }
 }

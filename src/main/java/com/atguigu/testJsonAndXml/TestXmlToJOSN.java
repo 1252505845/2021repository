@@ -32,7 +32,7 @@ import java.io.StringWriter;
 public class TestXmlToJOSN {
 
     public static void main(String[] args)throws Exception {
-        //将xml转化成json
+        //将本地xml文件转化成json
         String jsonStr = xmlToJson();
         //将json转换成xml
         String xmlStr = jsonToXml(jsonStr);
