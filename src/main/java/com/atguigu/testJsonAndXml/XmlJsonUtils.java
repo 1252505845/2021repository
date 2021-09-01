@@ -2,6 +2,7 @@ package com.atguigu.testJsonAndXml;
 
 import net.sf.json.JSONSerializer;
 import net.sf.json.xml.XMLSerializer;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -23,8 +24,13 @@ public class XmlJsonUtils {
      * xml 转 json
      */
     public static String xmlTojson(String xmlString) {
-        JSONObject jsonObject = XML.toJSONObject(xmlString);
+        try {
+            JSONObject jsonObject = XML.toJSONObject(xmlString);
 
-        return jsonObject.toString(10);
+            return jsonObject.toString(10);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -33,11 +33,53 @@ public class TestXmlToJOSN {
 
     public static void main(String[] args)throws Exception {
         //将本地xml文件转化成json
-        String jsonStr = xmlToJson();
+       // String jsonStr = xmlToJson();
         //将json转换成xml
-        String xmlStr = jsonToXml(jsonStr);
+   String xml="<message>\n" +
+           "<head>\n" +
+           "\t<code>1009430255</code>\n" +
+           "\t<stageId>go2Leq1wj5y8vuA5w7Azw</stageId>\n" +
+           "\t<gradeId>26vYkWDVjhivNno6Kbz7ZM</gradeId>\n" +
+           "\t<courseStageId>PcjbvAQ8h9KfZ8q6UZcw</courseStageId>\n" +
+           "</head>\n" +
+           "<body>\n" +
+           "\t<app_head>\n" +
+           "\t\t<name>ttt</name>\n" +
+           "\t\t<id>WtGG1FhQSmqIQhKU8pMg</id>\n" +
+           "\t</app_head>\n" +
+           "\t<tett>8766</tett>\n" +
+           "</body>\n" +
+           "</message>";
+        String json = xmlToJson(xml);
+        System.out.println(json);
+
+
+        //String jsonStr2="{\"source\":{\"code\":\"1009430255\",\"stageId\":\"go2Leq1wj5y8vuA5w7Azw\",\"gradeId\":\"26vYkWDVjhivNno6Kbz7ZM\",\"courseStageId\":\"PcjbvAQ8h9KfZ8q6UZcw\"},\"exerciseType\":{\"name\":\"张三\",\"id\":\"WtGG1FhQSmqIQhKU8pMg\"}}";
+        String jsonStr2="{\n" +
+                "        \"head\": {\n" +
+                "            \"code\": \"1009430255\", \n" +
+                "            \"stageId\": \"go2Leq1wj5y8vuA5w7Azw\", \n" +
+                "            \"gradeId\": \"26vYkWDVjhivNno6Kbz7ZM\", \n" +
+                "            \"courseStageId\": \"PcjbvAQ8h9KfZ8q6UZcw\"\n" +
+                "        }, \n" +
+                "        \"body\": {\n" +
+                "            \"app_head\": {\n" +
+                "                \"name\": \"张三\", \n" +
+                "                \"id\": \"WtGG1FhQSmqIQhKU8pMg\"\n" +
+                "            }, \n" +
+                "            \"tett\": \"8766\"\n" +
+                "        }\n" +
+                "    \n" +
+                "}";
+
+        String xmlStr2 = jsonToXml(jsonStr2);
+        System.out.println(xmlStr2);
+
+        String xmlToJson = xmlToJson(xmlStr2);
+        System.out.println(xmlToJson);
+        //String xmlStr = jsonToXml(jsonStr);
         //将json按照响应格式写入score2.xml
-        writeXmlToFile(xmlStr);
+       // writeXmlToFile(xmlStr);
 
     }
 
@@ -46,15 +88,15 @@ public class TestXmlToJOSN {
      * @return
      * @throws Exception
      */
-    public static String xmlToJson() throws Exception{
+    public static String xmlToJson(String xml) throws Exception{
         //使用DOM4j
-        SAXReader saxReader = new SAXReader();
-        //读取文件
-        Document read = saxReader.read("C:Users\\long\\Desktop\\test\\students.xml");
-        //使用json的xml转json方法
-        JSONObject jsonObject = XML.toJSONObject(read.asXML());
+//        SAXReader saxReader = new SAXReader();
+//        //读取文件
+//        Document read = saxReader.read("C:Users\\long\\Desktop\\httpAndDubbo\\students.xml");
+//        //使用json的xml转json方法
+        JSONObject jsonObject = XML.toJSONObject(xml);
         //设置缩进转为字符串
-        System.out.println(jsonObject.toString(3));
+       // System.out.println(jsonObject.toString(3));
         return jsonObject.toString(3);
     }
 
@@ -69,8 +111,8 @@ public class TestXmlToJOSN {
         //设置输出的格式
         OutputFormat format = OutputFormat.createPrettyPrint();
         //构建输出流
-        //C:\Users\long\Desktop\test\students.xml
-        XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("C:Users\\long\\Desktop\\test\\students2.xml"), format);
+        //C:\Users\long\Desktop\httpAndDubbo\students.xml
+        XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("C:Users\\long\\Desktop\\httpAndDubbo\\students2.xml"), format);
         //不要转义字符
         xmlWriter.setEscapeText(false);
         //写入
@@ -118,10 +160,10 @@ public class TestXmlToJOSN {
         }
         //移除头部标签
         if (output.toString().length() >= 38) {
-            System.out.println(output.toString().substring(39));
+//            System.out.println(output.toString().substring(39));
             return output.toString().substring(39);
         }
-        System.out.println(output);
+//        System.out.println(output);
         return output.toString();
     }
 }

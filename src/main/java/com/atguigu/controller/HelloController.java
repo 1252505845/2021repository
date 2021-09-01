@@ -1,15 +1,30 @@
 package com.atguigu.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.atguigu.bean.Person;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class HelloController {
 
     @ResponseBody
-    @RequestMapping("/hello")
+    @GetMapping("/hello")
     public String hello(){
         return "hello";
     }
+
+
+    @ResponseBody
+    @PostMapping("/stringParameter")
+    public Person stringParameter(String  stringParameterJson){
+        Person person=new Person();
+        person.setName("lisi");
+        person.setAge(12);
+        return person;
+    }
+
+
+
+
+
+
 }
