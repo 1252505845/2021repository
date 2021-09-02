@@ -14,8 +14,9 @@ public class Demo {
 
     public static void main(String[] args) {
         System.setProperty("server.port", "9090");
-        String response = HttpClientUtil.sendHttpGet("http://localhost:8080/hello");
-        System.out.println("getResponse---"+response);
+        //直接发送get请求
+        String response = HttpClientUtil.sendHttpGet("http://localhost:8080/hello?name=lisi&age=12");
+        System.out.println("get返回---"+response);
 
         String requestJson="{\n" +
                 "   \"message\": {\n" +
@@ -28,7 +29,7 @@ public class Demo {
                 "   }\n" +
                 "}";
         String postResponse = HttpClientUtil.sendHttpPostJson("http://localhost:8080/stringParameter", requestJson);
-        System.out.println("postResponse---"+postResponse);
+        System.out.println("post返回---"+postResponse);
 
 
     }

@@ -14,6 +14,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
@@ -117,12 +118,11 @@ public class HttpClientUtil {
     }
 
     /**
-     * 发送Post请求
-     *
-     * @param httpPost
+     * 发送post请求或者get请求
+     * @param httpPostOrGet
      * @return
      */
-    private static String sendHttpPost(HttpPost httpPost) {
+    private static <T>String sendHttpPostOrGet(T httpPostOrGet) {
 
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
@@ -132,9 +132,9 @@ public class HttpClientUtil {
             // 创建默认的httpClient实例.
             httpClient = getHttpClient();
             // 配置请求信息
-            httpPost.setConfig(requestConfig);
+            ((HttpRequestBase)httpPostOrGet).setConfig(requestConfig);
             // 执行请求
-            response = httpClient.execute(httpPost);
+            response = httpClient.execute((HttpRequestBase)httpPostOrGet);
             // 得到响应实例
             HttpEntity entity = response.getEntity();
 
@@ -174,62 +174,119 @@ public class HttpClientUtil {
     }
 
     /**
+     * 发送Post请求
+     *
+     * @param httpPost
+     * @return
+     */
+//    private static String sendHttpPost(HttpPost httpPost) {
+//
+//        CloseableHttpClient httpClient = null;
+//        CloseableHttpResponse response = null;
+//        // 响应内容
+//        String responseContent = null;
+//        try {
+//            // 创建默认的httpClient实例.
+//            httpClient = getHttpClient();
+//            // 配置请求信息
+//            httpPost.setConfig(requestConfig);
+//            // 执行请求
+//            response = httpClient.execute(httpPost);
+//            // 得到响应实例
+//            HttpEntity entity = response.getEntity();
+//
+//            // 可以获得响应头
+//            // Header[] headers = response.getHeaders(HttpHeaders.CONTENT_TYPE);
+//            // for (Header header : headers) {
+//            // System.out.println(header.getName());
+//            // }
+//
+//            // 得到响应类型
+//            // System.out.println(ContentType.getOrDefault(response.getEntity()).getMimeType());
+//
+//            // 判断响应状态
+//            if (response.getStatusLine().getStatusCode() >= 300) {
+//                throw new Exception(
+//                        "HTTP Request is not success, Response code is " + response.getStatusLine().getStatusCode());
+//            }
+//
+//            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+//                responseContent = EntityUtils.toString(entity, CHARSET_UTF_8);
+//                EntityUtils.consume(entity);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                // 释放资源
+//                if (response != null) {
+//                    response.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return responseContent;
+//    }
+
+    /**
      * 发送Get请求
      *
      * @param httpGet
      * @return
      */
-    private static String sendHttpGet(HttpGet httpGet) {
-
-        CloseableHttpClient httpClient = null;
-        CloseableHttpResponse response = null;
-        // 响应内容
-        String responseContent = null;
-        try {
-            // 创建默认的httpClient实例.
-            httpClient = getHttpClient();
-            // 配置请求信息
-            httpGet.setConfig(requestConfig);
-            // 执行请求
-            response = httpClient.execute(httpGet);
-            // 得到响应实例
-            HttpEntity entity = response.getEntity();
-
-            // 可以获得响应头
-            // Header[] headers = response.getHeaders(HttpHeaders.CONTENT_TYPE);
-            // for (Header header : headers) {
-            // System.out.println(header.getName());
-            // }
-
-            // 得到响应类型
-            // System.out.println(ContentType.getOrDefault(response.getEntity()).getMimeType());
-
-            // 判断响应状态
-            if (response.getStatusLine().getStatusCode() >= 300) {
-                throw new Exception(
-                        "HTTP Request is not success, Response code is " + response.getStatusLine().getStatusCode());
-            }
-
-            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
-                responseContent = EntityUtils.toString(entity, CHARSET_UTF_8);
-                //释放所有由httpEntity所持有的资源
-                EntityUtils.consume(entity);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // 释放资源
-                if (response != null) {
-                    response.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return responseContent;
-    }
+//    private static String sendHttpGet(HttpGet httpGet) {
+//
+//        CloseableHttpClient httpClient = null;
+//        CloseableHttpResponse response = null;
+//        // 响应内容
+//        String responseContent = null;
+//        try {
+//            // 创建默认的httpClient实例.
+//            httpClient = getHttpClient();
+//            // 配置请求信息
+//            httpGet.setConfig(requestConfig);
+//            // 执行请求
+//            response = httpClient.execute(httpGet);
+//            // 得到响应实例
+//            HttpEntity entity = response.getEntity();
+//
+//            // 可以获得响应头
+//            // Header[] headers = response.getHeaders(HttpHeaders.CONTENT_TYPE);
+//            // for (Header header : headers) {
+//            // System.out.println(header.getName());
+//            // }
+//
+//            // 得到响应类型
+//            // System.out.println(ContentType.getOrDefault(response.getEntity()).getMimeType());
+//
+//            // 判断响应状态
+//            if (response.getStatusLine().getStatusCode() >= 300) {
+//                throw new Exception(
+//                        "HTTP Request is not success, Response code is " + response.getStatusLine().getStatusCode());
+//            }
+//
+//            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+//                responseContent = EntityUtils.toString(entity, CHARSET_UTF_8);
+//                //释放所有由httpEntity所持有的资源
+//                EntityUtils.consume(entity);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                // 释放资源
+//                if (response != null) {
+//                    response.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return responseContent;
+//    }
 
 
 
@@ -242,7 +299,7 @@ public class HttpClientUtil {
     public static String sendHttpPost(String httpUrl) {
         // 创建httpPost
         HttpPost httpPost = new HttpPost(httpUrl);
-        return sendHttpPost(httpPost);
+        return sendHttpPostOrGet(httpPost);
     }
 
     /**
@@ -253,7 +310,7 @@ public class HttpClientUtil {
     public static String sendHttpGet(String httpUrl) {
         // 创建get请求
         HttpGet httpGet = new HttpGet(httpUrl);
-        return sendHttpGet(httpGet);
+        return sendHttpPostOrGet(httpGet);
     }
 
 
@@ -284,7 +341,7 @@ public class HttpClientUtil {
         }
         HttpEntity reqEntity = meBuilder.build();
         httpPost.setEntity(reqEntity);
-        return sendHttpPost(httpPost);
+        return sendHttpPostOrGet(httpPost);
     }
 
     /**
@@ -309,7 +366,7 @@ public class HttpClientUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return sendHttpPost(httpPost);
+        return sendHttpPostOrGet(httpPost);
     }
 
     /**
@@ -347,7 +404,7 @@ public class HttpClientUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return sendHttpPost(httpPost);
+        return sendHttpPostOrGet(httpPost);
     }
 
     /**
@@ -369,7 +426,7 @@ public class HttpClientUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return sendHttpPost(httpPost);
+        return sendHttpPostOrGet(httpPost);
     }
 
 
@@ -402,23 +459,5 @@ public class HttpClientUtil {
         return parameterBuffer.toString();
     }
 
-    public static void main(String[] args) throws Exception {
 
-//        System.out.println(sendHttpGet("http://www.baidu.com"));
-
-//        POST请求转发 无参数
-
-        //        POST请求转发  参数(格式:key1=value1&key2=value2)
-        System.out.println(sendHttpPost("http://localhost:8080/stringParameter","name=httpAndDubbo&age=12"));
-
-        //        POST请求转发 参数为map
-
-        //        POST请求转发  参数(格式 json)
-
-//        POST请求转发 发送xml数据
-
-
-
-
-    }
 }
