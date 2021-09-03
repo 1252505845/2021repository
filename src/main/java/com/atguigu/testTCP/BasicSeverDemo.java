@@ -21,7 +21,7 @@ public class BasicSeverDemo {
     public static void main(String[] args) {
         ServerSocket server = null;
         try {
-            server = new ServerSocket(80);
+            server = new ServerSocket(8089);
             System.out.println("server start!");
         } catch (IOException e) {
             e.printStackTrace();
