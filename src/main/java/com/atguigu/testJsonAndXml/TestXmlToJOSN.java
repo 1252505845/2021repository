@@ -54,25 +54,35 @@ public class TestXmlToJOSN {
         System.out.println(json);
 
 
-        //String jsonStr2="{\"source\":{\"code\":\"1009430255\",\"stageId\":\"go2Leq1wj5y8vuA5w7Azw\",\"gradeId\":\"26vYkWDVjhivNno6Kbz7ZM\",\"courseStageId\":\"PcjbvAQ8h9KfZ8q6UZcw\"},\"exerciseType\":{\"name\":\"张三\",\"id\":\"WtGG1FhQSmqIQhKU8pMg\"}}";
         String jsonStr2="{\n" +
-                "        \"head\": {\n" +
-                "            \"code\": \"1009430255\", \n" +
-                "            \"stageId\": \"go2Leq1wj5y8vuA5w7Azw\", \n" +
-                "            \"gradeId\": \"26vYkWDVjhivNno6Kbz7ZM\", \n" +
-                "            \"courseStageId\": \"PcjbvAQ8h9KfZ8q6UZcw\"\n" +
-                "        }, \n" +
-                "        \"body\": {\n" +
-                "            \"app_head\": {\n" +
-                "                \"name\": \"张三\", \n" +
-                "                \"id\": \"WtGG1FhQSmqIQhKU8pMg\"\n" +
-                "            }, \n" +
-                "            \"tett\": \"8766\"\n" +
-                "        }\n" +
-                "    \n" +
+                "  \"message\": {\n" +
+                "    \"Sys_Head\": {\n" +
+                "      \"SOURCE_TYPE\": \"namYYY\",\n" +
+                "      \"BRANCH_ID\": \"UUU\"\n" +
+                "    },\n" +
+                "    \"Body\": { \"yyDs\": \"sass\" },\n" +
+                "    \"userName\": \"\",\n" +
+                "    \"userAge\": \"12\"\n" +
+                "  }\n" +
                 "}";
+//        String jsonStr2="{\n" +
+//                "        \"head\": {\n" +
+//                "            \"code\": \"1009430255\", \n" +
+//                "            \"stageId\": \"go2Leq1wj5y8vuA5w7Azw\", \n" +
+//                "            \"gradeId\": \"26vYkWDVjhivNno6Kbz7ZM\", \n" +
+//                "            \"courseStageId\": \"PcjbvAQ8h9KfZ8q6UZcw\"\n" +
+//                "        }, \n" +
+//                "        \"body\": {\n" +
+//                "            \"app_head\": {\n" +
+//                "                \"name\": \"张三\", \n" +
+//                "                \"id\": \"WtGG1FhQSmqIQhKU8pMg\"\n" +
+//                "            }, \n" +
+//                "            \"tett\": \"8766\"\n" +
+//                "        }\n" +
+//                "    \n" +
+//                "}";
 
-        String xmlStr2 = jsonToXml(jsonStr2);
+        String xmlStr2 = XmlJsonUtils.jsonToxml(jsonStr2);
         System.out.println(xmlStr2);
 
         String xmlToJson = xmlToJson(xmlStr2);
