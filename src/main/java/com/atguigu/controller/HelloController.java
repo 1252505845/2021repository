@@ -1,5 +1,7 @@
 package com.atguigu.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.Service.HelloService;
 import com.atguigu.bean.Person;
 import lombok.extern.slf4j.Slf4j;
@@ -37,9 +39,14 @@ public class HelloController {
     @ResponseBody
     @PostMapping("/stringParameter")
     public Person stringParameter(@RequestBody String  stringParameterJson){
+        JSONObject jsonObject = JSON.parseObject(stringParameterJson);
+        String name = jsonObject.getString("name");
+        Integer age = jsonObject.getInteger("age");
+
         Person person=new Person();
-        person.setName("lisi");
-        person.setAge(12);
+        person.setName(name);
+        person.setAge(age);
+        log.info("person--"+person);
         return person;
     }
 
