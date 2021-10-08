@@ -82,7 +82,7 @@ public class TestXmlToJOSN {
 //                "    \n" +
 //                "}";
 
-        String xmlStr2 = XmlJsonUtils.jsonToxml(jsonStr2);
+        String xmlStr2 = XmlJsonUtils.jsonTo2Xml(jsonStr2);
         System.out.println(xmlStr2);
 
         String xmlToJson = xmlToJson(xmlStr2);

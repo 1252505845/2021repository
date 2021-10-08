@@ -22,6 +22,7 @@ public class JsonUtils {
         if (json instanceof JSONArray) {
             JSONArray arr = (JSONArray) json;
             for (Object obj : arr) {
+                System.out.println("JSONArray"+obj);
                 convert(obj);
             }
         } else if (json instanceof JSONObject) {
@@ -72,21 +73,83 @@ public class JsonUtils {
     }
 
     public static void main(String[] args) {
-        String str ="{\n" +
-                "  \"Body\": {\n" +
-                "    \"APP_HEAD\": {\n" +
-                "      \"SYS_HEAD\": {\n" +
-                "        \"SOURCE_TYPE\": \"namYYY\",\n" +
-                "        \"BRANCH_ID\": \"UUU\"\n" +
-                "      }\n" +
+
+//        String  str="{\n" +
+//                "  \"message\": {\n" +
+//                "    \"head\": {\n" +
+//                "      \"courseStageId\": \"PcjbvAQ8h9KfZ8q6UZcw\",\n" +
+//                "      \"gradeId\": \"26vYkWDVjhivNno6Kbz7ZM\",\n" +
+//                "      \"code\": \"1009430255\",\n" +
+//                "      \"stageId\": \"go2Leq1wj5y8vuA5w7Azw\"\n" +
+//                "    },\n" +
+//                "    \"body\": {\n" +
+//                "      \"tett\": \"8766\",\n" +
+//                "      \"app_head\": \n" +
+//                "          {\n" +
+//                "            \"name\": \"ttt\",\n" +
+//                "            \"id\": \"WtGG1FhQSmqIQhKU8pMg\"\n" +
+//                "          }\n" +
+//                "      \n" +
+//                "    }\n" +
+//                "  }\n" +
+//                "}";
+        //array
+//        String str ="{\n" +
+//                "  \"message\": {\n" +
+//                "    \"head\": {\n" +
+//                "      \"courseStageId\": \"PcjbvAQ8h9KfZ8q6UZcw\",\n" +
+//                "      \"gradeId\": \"26vYkWDVjhivNno6Kbz7ZM\",\n" +
+//                "      \"code\": \"1009430255\",\n" +
+//                "      \"stageId\": \"go2Leq1wj5y8vuA5w7Azw\"\n" +
+//                "    },\n" +
+//                "    \"body\": {\n" +
+//                "      \"tett\": \"8766\",\n" +
+//                "      \"app_head\": [\n" +
+//                "          {\n" +
+//                "            \"name\": \"ttt\",\n" +
+//                "            \"id\": \"WtGG1FhQSmqIQhKU8pMg\"\n" +
+//                "          },\n" +
+//                "          {\n" +
+//                "            \"name\": \"wwt\",\n" +
+//                "            \"id\": \"www\"\n" +
+//                "          }\n" +
+//                "        ]\n" +
+//                "      \n" +
+//                "    }\n" +
+//                "  }\n" +
+//                "}";
+
+
+        String str="{\n" +
+                "  \"message\": {\n" +
+                "    \"head\": {\n" +
+                "      \"courseStageId\": \"PcjbvAQ8h9KfZ8q6UZcw\",\n" +
+                "      \"gradeId\": \"26vYkWDVjhivNno6Kbz7ZM\",\n" +
+                "      \"code\": \"1009430255\",\n" +
+                "      \"stageId\": \"go2Leq1wj5y8vuA5w7Azw\"\n" +
                 "    },\n" +
-                "    \"YYDS\": \"sass\",\n" +
-                "    \"USER_NAME_TAF\": \"tom\",\n" +
-                "    \"USER_AGE\": \"12\"\n" +
+                "    \"body\": {\n" +
+                "      \"tett\": \"8766\",\n" +
+                "      \"app_head\": \n" +
+                "          [{\n" +
+                "            \"name\": \"ttt\",\n" +
+                "            \"id\": \"WtGG1FhQSmqIQhKU8pMg\"}\n" +
+                "          ]\n" +
+                "      \n" +
+                "    }\n" +
                 "  }\n" +
                 "}";
-        String json1 = convert(str).toString();
-        System.out.println(json1);
+        
+        String tt=" \"app_head\": \n" +
+                " {\n" +
+                "        \"row\": [\n" +
+                "          { \"name\": \"asas\" },\n" +
+                "          { \"name\": \"eeww\" }\n" +
+                "        ]\n" +
+                "      }";
+        Object parse = JSON.parse(tt);
+//        String json1 = convert(str).toString();
+//        System.out.println(json1);
 
 //        String[] s = "key".split("_");
 //        System.out.println(s.length);
