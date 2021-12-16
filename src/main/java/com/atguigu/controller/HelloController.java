@@ -20,8 +20,10 @@ public class HelloController {
     HelloService helloService;
 
     @ResponseBody
-    @GetMapping("/hello")
-    public String hello( String name,int age){
+    @PostMapping("/hello")
+    public String hello( @RequestBody String jsonSr){
+        log.info("jsonSr---"+jsonSr);
+        String name = JSONObject.parseObject(jsonSr).getString("username");
         Future<String> future = helloService.hello(name);
         String s="";
         try {
@@ -35,7 +37,47 @@ public class HelloController {
         return s;
     }
 
+    @ResponseBody
+    @GetMapping("/say")
+    public String say( ){
+        String name ="sasas";int age=90;
+        Future<String> future = helloService.hello(name);
+        String s="";
+        try {
+            s = future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        log.info("str"+s);
+        return s;
+    }
 
+
+    @ResponseBody
+    @GetMapping("/say2")
+    public String say2( ){
+        String name ="sasas";int age=90;
+        Future<String> future = helloService.hello(name);
+        String s="";
+        try {
+            s = future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        log.info("str"+s);
+        return s;
+    }
+
+
+    /**
+     * 测试HttpClient
+     * @param stringParameterJson
+     * @return
+     */
     @ResponseBody
     @PostMapping("/stringParameter")
     public Person stringParameter(@RequestBody String  stringParameterJson){

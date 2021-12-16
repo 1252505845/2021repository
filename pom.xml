@@ -27,6 +27,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
+
+
         <!--xml和json转换-->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -154,7 +156,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
         <!--AspectJ 开始-->
         <dependency>
@@ -194,6 +196,14 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
+        <!--kaptcha 生成验证码-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
 
 
 

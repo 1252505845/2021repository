@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +35,16 @@ public class TestDownLoad {
     }
 
 
-//    @RequestMapping(value = "/get2",produces = MediaType.IMAGE_JPEG_VALUE)
-//    @ResponseBody
-//    public BufferedImage getImage2() throws IOException {
-//        return ImageIO.read(new FileInputStream(new File("C:/Users/long/Desktop/test/test.jpg")));
-//    }
+    @RequestMapping(value = "/get2",produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public BufferedImage getImage2() throws IOException {
+        return ImageIO.read(new FileInputStream(new File("C:/Users/long/Desktop/test/test.jpg")));
+    }
 
-    //@RequestMapping("/download")
-    public String downLoadFile(String filename,HttpServletResponse response)  {
+    @RequestMapping("/download")
+    public String downLoadFile(HttpServletResponse response)  {
         String filePath = "F:/demo" ;
-        //String filename="test.jpg";
+        String filename="test.jpg";
         File file = new File(filePath + "/" + filename);
 //        if(file.exists()){ //判断文件父目录是否存在
             response.setContentType("application/vnd.ms-excel;charset=UTF-8");
@@ -85,16 +87,16 @@ public class TestDownLoad {
         return null;
     }
 
-    @RequestMapping("/download2")
-    public String downLoad2(HttpServletResponse response){
-        List<String> fileNameList = getFileNameList();
-        for (String fileName:fileNameList){
-            downLoadFile(fileName,response);
-        }
-
-
-        return  null;
-    }
+//    @RequestMapping("/download2")
+//    public String downLoad2(HttpServletResponse response){
+//        List<String> fileNameList = getFileNameList();
+//        for (String fileName:fileNameList){
+//            downLoadFile(fileName,response);
+//        }
+//
+//
+//        return  null;
+//    }
         public List<String> getFileNameList(){
             File file = new File("F:/demo");
             List<String> list1 = new ArrayList<String>();

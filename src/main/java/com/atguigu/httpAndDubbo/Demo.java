@@ -31,6 +31,10 @@ public class Demo {
         String postResponse = HttpClientUtil.sendHttpPostJson("http://localhost:8080/stringParameter", requestJson);
         System.out.println("post返回---"+postResponse);
 
+        //key1=value1&key2=value2
+
+//        HttpClientUtil.send
+
 
     }
 

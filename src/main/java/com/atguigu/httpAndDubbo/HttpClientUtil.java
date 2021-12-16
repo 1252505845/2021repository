@@ -54,7 +54,6 @@ public class HttpClientUtil {
     public static final String CONTENT_TYPE_JSON_URL = "application/json;charset=utf-8";
 
 
-
     // 连接管理器
     private static PoolingHttpClientConnectionManager pool;
 
@@ -173,120 +172,8 @@ public class HttpClientUtil {
         return responseContent;
     }
 
-    /**
-     * 发送Post请求
-     *
-     * @param httpPost
-     * @return
-     */
-//    private static String sendHttpPost(HttpPost httpPost) {
-//
-//        CloseableHttpClient httpClient = null;
-//        CloseableHttpResponse response = null;
-//        // 响应内容
-//        String responseContent = null;
-//        try {
-//            // 创建默认的httpClient实例.
-//            httpClient = getHttpClient();
-//            // 配置请求信息
-//            httpPost.setConfig(requestConfig);
-//            // 执行请求
-//            response = httpClient.execute(httpPost);
-//            // 得到响应实例
-//            HttpEntity entity = response.getEntity();
-//
-//            // 可以获得响应头
-//            // Header[] headers = response.getHeaders(HttpHeaders.CONTENT_TYPE);
-//            // for (Header header : headers) {
-//            // System.out.println(header.getName());
-//            // }
-//
-//            // 得到响应类型
-//            // System.out.println(ContentType.getOrDefault(response.getEntity()).getMimeType());
-//
-//            // 判断响应状态
-//            if (response.getStatusLine().getStatusCode() >= 300) {
-//                throw new Exception(
-//                        "HTTP Request is not success, Response code is " + response.getStatusLine().getStatusCode());
-//            }
-//
-//            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
-//                responseContent = EntityUtils.toString(entity, CHARSET_UTF_8);
-//                EntityUtils.consume(entity);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                // 释放资源
-//                if (response != null) {
-//                    response.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return responseContent;
-//    }
 
-    /**
-     * 发送Get请求
-     *
-     * @param httpGet
-     * @return
-     */
-//    private static String sendHttpGet(HttpGet httpGet) {
-//
-//        CloseableHttpClient httpClient = null;
-//        CloseableHttpResponse response = null;
-//        // 响应内容
-//        String responseContent = null;
-//        try {
-//            // 创建默认的httpClient实例.
-//            httpClient = getHttpClient();
-//            // 配置请求信息
-//            httpGet.setConfig(requestConfig);
-//            // 执行请求
-//            response = httpClient.execute(httpGet);
-//            // 得到响应实例
-//            HttpEntity entity = response.getEntity();
-//
-//            // 可以获得响应头
-//            // Header[] headers = response.getHeaders(HttpHeaders.CONTENT_TYPE);
-//            // for (Header header : headers) {
-//            // System.out.println(header.getName());
-//            // }
-//
-//            // 得到响应类型
-//            // System.out.println(ContentType.getOrDefault(response.getEntity()).getMimeType());
-//
-//            // 判断响应状态
-//            if (response.getStatusLine().getStatusCode() >= 300) {
-//                throw new Exception(
-//                        "HTTP Request is not success, Response code is " + response.getStatusLine().getStatusCode());
-//            }
-//
-//            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
-//                responseContent = EntityUtils.toString(entity, CHARSET_UTF_8);
-//                //释放所有由httpEntity所持有的资源
-//                EntityUtils.consume(entity);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                // 释放资源
-//                if (response != null) {
-//                    response.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return responseContent;
-//    }
+
 
 
 
@@ -353,7 +240,7 @@ public class HttpClientUtil {
      *      参数(格式:key1=value1&key2=value2)
      *
      */
-    public static String sendHttpPost(String httpUrl, String params) {
+    public static String sendHttpFormPost(String httpUrl, String params) {
         HttpPost httpPost = new HttpPost(httpUrl);// 创建httpPost
         try {
             // 设置参数
@@ -377,7 +264,7 @@ public class HttpClientUtil {
      */
     public static String sendHttpPost(String httpUrl, Map<String, String> maps) {
         String parem = convertStringParamter(maps);
-        return sendHttpPost(httpUrl, parem);
+        return sendHttpFormPost(httpUrl, parem);
     }
 
 

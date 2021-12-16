@@ -1,9 +1,12 @@
 package com.atguigu.uploadAndDownLoad;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.testJsonAndXml.XmlJsonUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,9 +21,35 @@ public class Demo {
 
     public static void main(String[] args) {
 //        String str="{\"data\": {\"userInfoData\": {\"row\": { \"age\": \"1\"}},\"perInfoData\": {\"row\": { \"perage\": \"1\" }}}}";
-        String str ="{\"data\": {\"row\": {\"userInfoData\": {\"row\": [{ \"age\": \"1\" },{ \"age\": \"66\" }]},\"perInfoData\": {\"row\": { \"perage\": \"1\" }}}}}";
+//        String str ="{\"data\": {\"row\": {\"userInfoData\": {\"row\": [{ \"age\": \"1\" },{ \"age\": \"66\" }]},\"perInfoData\": {\"row\": { \"perage\": \"1\" }}}}}";
+            String str="{\n" +
+                    "  \"data\": {\n" +
+                    "    \"appHead\": {\n" +
+                    "      \"yuyu\": \"878\",\n" +
+                    "      \"tutu\": \"877\",\n" +
+                    "      \"suyu\": \"78\"\n" +
+                    "    },\n" +
+                    "    \"userInfoData\": {\n" +
+                    "      \"row\": [\n" +
+                    "        { \"age\": \"1\" },\n" +
+                    "        { \"age\": \"66\" }\n" +
+                    "      ]\n" +
+                    "    },\n" +
+                    "    \"perInfoData\": {\n" +
+                    "      \"row\": { \"perage\": \"1\" }\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}";
 
-        String jsonToxml = XmlJsonUtils.jsonTo2Xml(str);
+        JSONObject jsonObject = JSON.parseObject(str);
+        String data = jsonObject.getString("data");
+        HashMap hashMap = JSON.parseObject(data, HashMap.class);
+        System.out.println("hashMap---"+hashMap);
+        hashMap.remove("appHead");
+        String string = JSONObject.toJSONString(hashMap);
+
+        System.out.println("jsonObject2==========="+string);
+        String jsonToxml = XmlJsonUtils.jsonTo2Xml(str.toString());
         System.out.println(jsonToxml.trim());
 
         //         str = str.trim();
